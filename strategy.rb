@@ -1,6 +1,15 @@
-class Formatter
-  def output_report(tilte, text)
-    raise 'Abstract method called!'
+class Report
+  attr_reader :title, :text
+  attr_accessor :formatter
+
+  def initialize(formatter)
+    @title = '月次報告'
+    @text = %w(順調 最高の調子)
+    @formatter = formatter
+  end
+
+  def output_report
+    @formatter.output_report(self)
   end
 end
 
@@ -25,21 +34,6 @@ class PlainTextFormatter < Formatter
     text.each do |line|
       puts(line)
     end
-  end
-end
-
-class Report
-  attr_reader :title, :text
-  attr_accessor :formatter
-
-  def initialize(formatter)
-    @title = '月次報告'
-    @text = %w(順調 最高の調子)
-    @formatter = formatter
-  end
-
-  def output_report
-    @formatter.output_report(self)
   end
 end
 
